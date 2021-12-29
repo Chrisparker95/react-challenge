@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Grid from '@mui/material/Grid'
-import SelectForm from './selectForm'
+import RepAndStateForm from './RepAndStateForm'
 import PeopleTable from './peopleTable'
 import PersonInfo from './personInfo'
 import Alert from '@mui/material/Alert'
@@ -24,7 +24,7 @@ class App extends React.Component {
 			],
 			errorMsg: '',
 			websiteLink: '',
-			disableWebsite: true,
+			disableWebsiteBtn: true,
 		}
 	}
 
@@ -42,7 +42,7 @@ class App extends React.Component {
 					{ name: 'office', label: 'Office', value: '' },
 				],
 				websiteLink: '',
-				disableWebsite: true,
+				disableWebsiteBtn: true,
 			},
 			() => {
 				this.GetData()
@@ -63,7 +63,7 @@ class App extends React.Component {
 				{ name: 'office', label: 'Office', value: extraInfo[0].office },
 			],
 			websiteLink: extraInfo[0].link,
-			disableWebsite: false,
+			disableWebsiteBtn: false,
 		})
 	}
 
@@ -89,7 +89,7 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<Grid container item direction='column' spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} p={3}>
+			<Grid container direction='column' spacing={{ xs: 2, md: 3 }} p={3}>
 				{this.state.errorMsg && (
 					<Grid item>
 						<Alert severity='error'>{this.state.errorMsg}</Alert>
@@ -101,10 +101,11 @@ class App extends React.Component {
 					</Typography>
 				</Grid>
 				<Grid item>
-					<SelectForm repType={this.state.repType} state={this.state.state} updateInput={this.updateInput} />
+					<RepAndStateForm repType={this.state.repType} state={this.state.state} updateInput={this.updateInput} />
 				</Grid>
+
 				<Grid container item direction='row' spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-					<Grid container item direction='column' xs={2} sm={4} md={4}>
+					<Grid container item direction='column' xs={2} sm={4} md={6}>
 						<Grid item>
 							<Typography display='inline' color='#000000' variant='h5'>
 								List /{' '}
@@ -117,12 +118,12 @@ class App extends React.Component {
 							<PeopleTable people={this.state.people} onClickFun={this.populateExtraInfo} />
 						</Grid>
 					</Grid>
-					<Grid container item direction='column' xs={2} sm={4} md={8}>
+					<Grid container item direction='column' xs={2} sm={4} md={6}>
 						<Grid item>
 							<Typography variant='h5'>Info</Typography>
 						</Grid>
 						<Grid item>
-							<PersonInfo infoFields={this.state.infoFields} websiteLink={this.state.websiteLink} disableWebsite={this.state.disableWebsite} />
+							<PersonInfo infoFields={this.state.infoFields} websiteLink={this.state.websiteLink} disableWebsiteBtn={this.state.disableWebsiteBtn} />
 						</Grid>
 					</Grid>
 				</Grid>

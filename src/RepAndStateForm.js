@@ -77,7 +77,7 @@ function SelectComp(props) {
 	)
 }
 
-class Form extends React.Component {
+class RepAndStateForm extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = { repType: 'Representatives', state: 'AL' }
@@ -116,4 +116,4 @@ class Form extends React.Component {
 	}
 }
 
-export default Form
+export default RepAndStateForm
