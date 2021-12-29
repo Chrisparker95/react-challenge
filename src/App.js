@@ -104,7 +104,7 @@ class App extends React.Component {
 					<SelectForm repType={this.state.repType} state={this.state.state} updateInput={this.updateInput} />
 				</Grid>
 				<Grid container item direction='row' spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-					<Grid container item direction='column' xs={2} sm={4} md={6}>
+					<Grid container item direction='column' xs={2} sm={4} md={4}>
 						<Grid item>
 							<Typography display='inline' color='#000000' variant='h5'>
 								List /{' '}
@@ -117,7 +117,7 @@ class App extends React.Component {
 							<PeopleTable people={this.state.people} onClickFun={this.populateExtraInfo} />
 						</Grid>
 					</Grid>
-					<Grid container item direction='column' xs={2} sm={4} md={6}>
+					<Grid container item direction='column' xs={2} sm={4} md={8}>
 						<Grid item>
 							<Typography variant='h5'>Info</Typography>
 						</Grid>
