@@ -82,14 +82,14 @@ class App extends React.Component {
 					// network error
 					this.setState({ people: [], errorMsg: 'Network error, please try again.' })
 				} else {
-					this.setState({ people: [], errorMsg: error.response.data.message })
+					this.setState({ people: [], errorMsg: 'There was a problem with your request, please try again.' })
 				}
 			})
 	}
 
 	render() {
 		return (
-			<Grid container direction='column' spacing={{ xs: 2, md: 3 }} p={3}>
+			<Grid container direction='column' spacing={{ xs: 2, md: 3 }} p={3} sx={{ maxWidth: 800 }}>
 				{this.state.errorMsg && (
 					<Grid item>
 						<Alert severity='error'>{this.state.errorMsg}</Alert>
