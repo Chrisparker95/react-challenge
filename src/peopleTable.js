@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -20,44 +20,44 @@ const TableHeaderCell = withStyles(() => ({
 	},
 }))(TableCell)
 
-class PeopleTable extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = { people: this.props.people, selectedRow: '' }
+function PeopleTable(props) {
+	const [selectedRow, setSelectedRow] = useState('')
+
+	const handleSelectedRowChange = (rowName) => {
+		setSelectedRow(rowName)
 	}
 
-	render() {
-		return (
-			<TableContainer component={Paper}>
-				<Table>
-					<TableHead>
-						<TableRow>
-							<TableHeaderCell>Name</TableHeaderCell>
-							<TableHeaderCell align='justify'>Party</TableHeaderCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{this.props.people.data &&
-							this.props.people.data.results.map((row) => (
-								<TableRow
-									selected={this.state.selectedRow === row.name}
-									hover
-									key={row.name}
-									onClick={() => {
-										this.setState({ selectedRow: row.name })
-										this.props.onClickFun(row.name)
-									}}
-								>
-									<TableCell component='th' scope='row'>
-										{row.name}
-									</TableCell>
-									<TableCell align='justify'>{row.party.charAt(0)}</TableCell>
-								</TableRow>
-							))}
-					</TableBody>
-				</Table>
-			</TableContainer>
-		)
-	}
+	return (
+		<TableContainer component={Paper}>
+			<Table>
+				<TableHead>
+					<TableRow>
+						<TableHeaderCell>Name</TableHeaderCell>
+						<TableHeaderCell align='justify'>Party</TableHeaderCell>
+					</TableRow>
+				</TableHead>
+				<TableBody>
+					{props.people.data &&
+						props.people.data.results.map((row) => (
+							<TableRow
+								selected={selectedRow === row.name}
+								hover
+								key={row.name}
+								onClick={() => {
+									handleSelectedRowChange(row.name)
+									props.onClickFun(row.name)
+								}}
+							>
+								<TableCell component='th' scope='row'>
+									{row.name}
+								</TableCell>
+								<TableCell align='justify'>{row.party.charAt(0)}</TableCell>
+							</TableRow>
+						))}
+				</TableBody>
+			</Table>
+		</TableContainer>
+	)
 }
+
 export default PeopleTable

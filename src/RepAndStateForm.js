@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import InputLabel from '@mui/material/InputLabel'
 import Button from '@mui/material/Button'
 import FormControl from '@mui/material/FormControl'
@@ -77,43 +77,39 @@ function SelectComp(props) {
 	)
 }
 
-class RepAndStateForm extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = { repType: 'Representatives', state: 'AL' }
+function RepAndStateForm(props) {
+	const [repType, setRepType] = useState('Representatives')
+	const [state, setState] = useState('AL')
 
-		this.handleChange = this.handleChange.bind(this)
-		this.handleSubmit = this.handleSubmit.bind(this)
+	const handleRepChange = (e) => {
+		setRepType(e.target.value)
+	}
+	const handleStateChange = (e) => {
+		setState(e.target.value)
 	}
 
-	handleChange(event) {
-		this.setState({ [event.target.name]: event.target.value })
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		props.updateInput(repType, state)
 	}
 
-	handleSubmit(event) {
-		this.props.updateInput(this.state.repType, this.state.state)
-		event.preventDefault()
-	}
-
-	render() {
-		return (
-			<form onSubmit={this.handleSubmit}>
-				<FormControl sx={{ m: 1, minWidth: 120 }}>
-					<InputLabel htmlFor='rep-select'>Rep Type</InputLabel>
-					<SelectComp name='repType' value={this.state.repType} id='rep-select' label='Rep Type' changeFun={this.handleChange} values={repTypes} />
-				</FormControl>
-				<FormControl sx={{ m: 1, minWidth: 120 }}>
-					<InputLabel htmlFor='state-select'>State</InputLabel>
-					<SelectComp name='state' value={this.state.state} id='state-select' label='State' changeFun={this.handleChange} values={states} />
-				</FormControl>
-				<FormControl sx={{ m: 1, minWidth: 120 }}>
-					<Button size='large' variant='contained' color='primary' type='submit'>
-						Submit
-					</Button>
-				</FormControl>
-			</form>
-		)
-	}
+	return (
+		<form onSubmit={handleSubmit}>
+			<FormControl sx={{ m: 1, minWidth: 120 }}>
+				<InputLabel htmlFor='rep-select'>Rep Type</InputLabel>
+				<SelectComp name='repType' value={repType} id='rep-select' label='Rep Type' changeFun={handleRepChange} values={repTypes} />
+			</FormControl>
+			<FormControl sx={{ m: 1, minWidth: 120 }}>
+				<InputLabel htmlFor='state-select'>State</InputLabel>
+				<SelectComp name='state' value={state} id='state-select' label='State' changeFun={handleStateChange} values={states} />
+			</FormControl>
+			<FormControl sx={{ m: 1, minWidth: 120 }}>
+				<Button size='large' variant='contained' color='primary' type='submit'>
+					Submit
+				</Button>
+			</FormControl>
+		</form>
+	)
 }
 
 export default RepAndStateForm
