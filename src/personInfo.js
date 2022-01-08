@@ -27,7 +27,7 @@ function PersonInfo(props) {
 				<TextBox key={field.name} name={field.name} label={field.label} value={field.value} />
 			))}
 			<Grid item>
-				<Button fullWidth size='large' target='_blank' variant='contained' href={props.websiteLink} disabled={props.disableWebsiteBtn}>
+				<Button fullWidth size='large' target='_blank' variant='contained' href={props.websiteLink} disabled={props.websiteLink < 1}>
 					Website
 				</Button>
 			</Grid>

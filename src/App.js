@@ -7,6 +7,7 @@ import Alert from '@mui/material/Alert'
 import Typography from '@mui/material/Typography'
 
 const axios = require('axios')
+const apiURL = '//localhost:4000'
 
 function App() {
 	const [repType, setRepType] = useState('')
@@ -21,7 +22,6 @@ function App() {
 	])
 	const [errorMsg, setErrorMsg] = useState('')
 	const [websiteLink, setWebsiteLink] = useState('')
-	const [disableWebsiteBtn, setDisableWebsiteBtn] = useState(true)
 
 	const handleRepTypeChange = (value) => {
 		setRepType(value)
@@ -41,9 +41,6 @@ function App() {
 	const handleWebsiteLinkChange = (value) => {
 		setWebsiteLink(value)
 	}
-	const handleDisableWebsiteBtnChange = (value) => {
-		setDisableWebsiteBtn(value)
-	}
 
 	const updateInput = (newRep, newState) => {
 		handleRepTypeChange(newRep)
@@ -57,7 +54,6 @@ function App() {
 		])
 
 		handleWebsiteLinkChange('')
-		handleDisableWebsiteBtnChange(true)
 		GetData(newRep, newState)
 	}
 
@@ -76,12 +72,11 @@ function App() {
 		])
 
 		handleWebsiteLinkChange(extraInfo[0].link)
-		handleDisableWebsiteBtnChange(false)
 	}
 
 	const GetData = (newRep, newState) => {
 		axios
-			.get(`//localhost:4000/${newRep}/${newState}`)
+			.get(`${apiURL}/${newRep}/${newState}`)
 			.then((response) => {
 				if (response.data.success) {
 					handlePeopleChange(response)
@@ -138,7 +133,7 @@ function App() {
 						<Typography variant='h5'>Info</Typography>
 					</Grid>
 					<Grid item>
-						<PersonInfo infoFields={infoFields} websiteLink={websiteLink} disableWebsiteBtn={disableWebsiteBtn} />
+						<PersonInfo infoFields={infoFields} websiteLink={websiteLink} />
 					</Grid>
 				</Grid>
 			</Grid>

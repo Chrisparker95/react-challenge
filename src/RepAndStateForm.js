@@ -81,7 +81,7 @@ function RepAndStateForm(props) {
 	const [repType, setRepType] = useState('Representatives')
 	const [state, setState] = useState('AL')
 
-	const handleRepChange = (e) => {
+	const handleRepTypeChange = (e) => {
 		setRepType(e.target.value)
 	}
 	const handleStateChange = (e) => {
@@ -97,7 +97,7 @@ function RepAndStateForm(props) {
 		<form onSubmit={handleSubmit}>
 			<FormControl sx={{ m: 1, minWidth: 120 }}>
 				<InputLabel htmlFor='rep-select'>Rep Type</InputLabel>
-				<SelectComp name='repType' value={repType} id='rep-select' label='Rep Type' changeFun={handleRepChange} values={repTypes} />
+				<SelectComp name='repType' value={repType} id='rep-select' label='Rep Type' changeFun={handleRepTypeChange} values={repTypes} />
 			</FormControl>
 			<FormControl sx={{ m: 1, minWidth: 120 }}>
 				<InputLabel htmlFor='state-select'>State</InputLabel>
